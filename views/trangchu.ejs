@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trang chủ</title>
+</head>
+<body>
+    <div id="mrA">Click send</div>
+    <h2 id="noidung"></h2>
+</body>
+<script src="jquery.js"></script>
+<script src="socket.io/socket.io.js"></script>
+<script>
+    var socket = io("http://localhost:3000/");
+    //server trả về socket
+    socket.on("server-send-data", function (data) {
+        $("#noidung").append(data + ",");
+    });
+    $(document).ready(function() {
+        $("#mrA").click(function(){
+            socket.emit("client-send-data", "Hello");
+        });
+    });
+</script>
+</html>
